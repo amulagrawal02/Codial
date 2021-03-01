@@ -1,6 +1,26 @@
 <link rel="stylesheet" href="/css/header.css">
+
 <header id="navBar">
 
-    <h1>Codial</h1>
-    
+        <h1 style="margin-left: 10px;">Codial</h1>
+
+        <div class="Auth">
+
+                <% if(locals.user){ %>
+
+                        <a href="/user/profile"><%= user.name %></a>
+                        <a href="/user/sign-out"><i class="fas fa-sign-out-alt"></i></a>
+
+                <% }else{ %>
+
+                        <a href="/user/sign-in">Sign In</a>
+                        <a href="/user/sign-up">Sign Up</a>
+
+                <% } %>
+
+        </div>
+
+
+
+
 </header>
