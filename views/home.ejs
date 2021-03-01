@@ -1,6 +1,16 @@
+<h1>Welcome to Codial</h1>
 
-    <h1>Welcome to Codial</h1>
-    
-    <a href="/user/sign-in">Sign In </a>
-    <a href="/user/sign-up" style="margin: 30px;">Sign Up</a>
 
+
+<%if(locals.user){%>
+
+    <form action="/posts/create" method="POST">
+        <textarea name="content" cols="40" rows="5" placeholder="Enter Here...."></textarea>
+        <input type="submit" value="Submit">
+    </form>
+
+    <%} else {%>
+        <a href="/user/sign-in">Sign In </a>
+        <a href="/user/sign-up" style="margin: 30px;">Sign Up</a>
+
+        <%}%>
