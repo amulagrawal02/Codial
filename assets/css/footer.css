@@ -1,7 +1,6 @@
 #footerBar {
-  position: fixed;
   background-color: #002240;
   color: white;
   width: 100%;
-  bottom: 0px;
-  height: 80px; }
+  height: 80px;
+  bottom: 0; }

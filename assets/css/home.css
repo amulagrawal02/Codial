@@ -1,0 +1,17 @@
+.post-container {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  color: black;
+  border: royalblue 1px solid;
+  margin-bottom: 20px; }
+
+.post-name {
+  color: black;
+  text-align: start; }
+
+.small-margin {
+  margin-left: 5px; }
+
+.medium-margin {
+  margin-right: 150px; }
