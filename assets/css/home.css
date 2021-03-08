@@ -8,10 +8,28 @@
 
 .post-name {
   color: black;
+  text-align: start;
+  margin-top: 5px; }
+
+.comment-name {
+  margin-top: 15px;
+  color: black;
   text-align: start; }
 
 .small-margin {
   margin-left: 5px; }
 
 .medium-margin {
-  margin-right: 150px; }
+  text-align: start;
+  margin-left: 25px; }
+
+.btn-blue {
+  background-color: #376db3;
+  color: white; }
+
+.comment-content {
+  text-align: start;
+  margin-left: 25px; }
+
+#post-comment {
+  margin-top: 5px; }
