@@ -11,7 +11,6 @@
 
     </form>
     <%}%>
-
         <div>
 
             <%for(post of posts) { %>
@@ -40,31 +39,39 @@
                             <input class="btn-blue" type="submit" value="Add Comment">
                         </form>
                     </div>
-                    <div class="comments " >
-                        <h3>Comments</h3>
-                    </div>
-                    <div class="comment-container">
-                        <%for(comment of post.comments){%>
-                            <div class="comment-name">
 
+
+
+                    <div>
+                        <h5 class="comments">Comments <i class=" down fas fa-caret-right"></i></h5>
+                        <div class="comment-container" id="<%=post._id%>">
+                        <%for(comment of post.comments){%>
+
+                            <div class="comment-name">
                                 <i class="fas fa-user-circle small-margin"></i>
                                 <class="small-margin">
                                     <%=comment.user.name%>
                             </div>
+
                             <div class="post-time medium-margin">
                                 <small><i class="far fa-clock"></i>
                                     <%=(comment.createdAt).toLocaleTimeString('it-IT')%>
                                 </small>
                             </div>
+
                             <div class="comment-content">
                                 <%=comment.content%>
                             </div>
                             <%} %>
-                    </div>
+                        </div>
+
                 </div>
 
-
-
-                <%}%>
-
         </div>
+        </div>
+
+
+
+        <%}%>
+
+            </div>

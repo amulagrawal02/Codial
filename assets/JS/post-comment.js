@@ -6,7 +6,7 @@ var commentContent = document.getElementById('comment-container');
 // commentContent.style.display = 'none'
 
 
-$('.comments').click(function()
+$('.comments').click(function(event)
 {
     // if(commentContent.style.display == 'none')
     // {
@@ -16,9 +16,12 @@ $('.comments').click(function()
     // {
     //     commentContent.style.display = 'none'
     // }
-    console.log("hiie")
-    $(".comment-container").toggleClass("show");
+    console.log(event.target)
+    var data = event.target;
+    var idData = data.nextElementSibling.id;
+    $('#' + idData).toggleClass("show");
   
 
 
 })
+

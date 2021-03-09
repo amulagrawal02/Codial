@@ -38,7 +38,16 @@
   display: none; }
 
 .comments {
-  cursor: pointer; }
+  display: inline-block;
+  font-family: cursive;
+  color: #0fc4f1;
+  cursor: pointer;
+  margin-right: 200px;
+  margin-top: 5px; }
 
 .show {
-  display: block; }
+  display: block;
+  margin-top: -25px; }
+
+.down {
+  transform: translateY(2px); }
