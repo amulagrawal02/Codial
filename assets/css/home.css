@@ -33,3 +33,12 @@
 
 #post-comment {
   margin-top: 5px; }
+
+.comment-container {
+  display: none; }
+
+.comments {
+  cursor: pointer; }
+
+.show {
+  display: block; }
