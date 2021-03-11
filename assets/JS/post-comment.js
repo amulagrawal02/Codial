@@ -18,7 +18,16 @@ $('.comments').click(function(event)
     // }
     console.log(event.target)
     var data = event.target;
-    var idData = data.nextElementSibling.id;
+    
+    
+    try{
+        var idData = data.nextElementSibling.nextElementSibling.nextElementSibling.id;
+        console.log(data.nextElementSibling.nextElementSibling.nextElementSibling)
+    }
+    catch{
+        var idData = data.nextElementSibling.nextElementSibling.id;
+        console.log(data.nextElementSibling.nextElementSibling)
+    }
     $('#' + idData).toggleClass("show");
   
 

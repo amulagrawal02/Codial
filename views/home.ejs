@@ -22,6 +22,7 @@
                         <class="small-margin">
                             <%=post.user.name%>
                     </div>
+
                     <div class="post-time medium-margin">
                         <small><i class="far fa-clock"></i>
                             <%=(post.createdAt).toLocaleTimeString('it-IT')%>
@@ -31,21 +32,27 @@
                         <%=post.content%>
 
                     </div>
+                    <a href="#"><i class="far fa-thumbs-up" id="like"></i></a>
+                    <i class=" comments far fa-comments"></i>
+                    <a href="#"><i class="fas fa-share" id="share"></i></a>
+                    <%if(locals.user.id == post.user.id){%>
+                        
+                        <a href="/posts/destroy<%=post._id%>"><i class="delete far fa-trash-alt" id="delete"></i></a>
+                        <%}%>
+                    
 
-                    <div id="post-comment">
-                        <form action="/comment/create-comment" method="POST">
-                            <input type="text" name="content" placeholder="Add comment..." required>
-                            <input type="hidden" name="post" value="<%=post._id%>">
-                            <input class="btn-blue" type="submit" value="Add Comment">
-                        </form>
-                    </div>
 
 
-
-                    <div>
-                        <h5 class="comments">Comments <i class=" down fas fa-caret-right"></i></h5>
-                        <div class="comment-container" id="<%=post._id%>">
+                    <div class="comment-container" id="<%=post._id%>">
+                        <div id="post-comment">
+                            <form action="/comment/create-comment" method="POST">
+                                <input type="text" name="content" placeholder="Add comment..." required>
+                                <input type="hidden" name="post" value="<%=post._id%>">
+                                <input class="btn-blue" type="submit" value="Add Comment">
+                            </form>
+                        </div>
                         <%for(comment of post.comments){%>
+
 
                             <div class="comment-name">
                                 <i class="fas fa-user-circle small-margin"></i>
@@ -63,11 +70,12 @@
                                 <%=comment.content%>
                             </div>
                             <%} %>
-                        </div>
+                    </div>
+
+
+
 
                 </div>
-
-        </div>
         </div>
 
 

@@ -1,5 +1,7 @@
 const { localsName } = require('ejs');
+const { findById } = require('../models/postSchema');
 const Post = require('../models/postSchema');
+const Comment = require('../models/commetSchema')
 
 module.exports.create = function(req,res)
 {
@@ -23,4 +25,30 @@ module.exports.create = function(req,res)
 
         }
     )
+}
+
+module.exports.destroy = function(req,res)
+{
+    Post.findById(req.params.id,function(err,post)
+    {
+       
+
+        // .id means converting the object id into string inbuilt  
+        if(post.user == req.user.id)
+        {
+
+           post.remove();
+           Comment.deleteMany({post : req.params.id},function(err)
+           {
+               return res.redirect('back');
+           })
+           
+        }
+        else
+        {
+            console.log("Error while deleting")
+            return res.redirect('back')
+        }
+
+    })
 }
