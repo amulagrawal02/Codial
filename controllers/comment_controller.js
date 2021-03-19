@@ -38,9 +38,7 @@ module.exports.destroy = function(req,res)
 {
     Comment.findById(req.params.id, function(err, comment)
     {
-        console.log('1')
-        console.log(comment);
-        console.log(req.params.id)
+       
         if(err)
         {
             console.log("Error during deleting the comment");
@@ -52,10 +50,15 @@ module.exports.destroy = function(req,res)
             {
                 let PostId = comment.post;
                 comment.remove();
-                Post.findByIdAndUpdate(PostId,{ $pull: {comments : req.params._id}, function(err,post) {
+                Post.findByIdAndUpdate(PostId,{ $pull: {comments : req.params.id}}, function(err,post) {
+                    if(err)
+                    {
+                        console.log('Error while deleting the comment');
+                        return res.redirect('back');
+                    }
                     return res.redirect('back');
-                }})
-                return res.redirect('back')
+                })
+            
             }
             else{
                 return res.redirect('back')

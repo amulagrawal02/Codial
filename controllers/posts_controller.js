@@ -32,6 +32,12 @@ module.exports.destroy = function(req,res)
     Post.findById(req.params.id,function(err,post)
     {
        
+        for(comment of post.comments)
+        {
+            Comment.findById(comment._id,function (err,comments) {
+                comments.remove();
+            })
+        }
 
         // .id means converting the object id into string inbuilt  
         if(post.user == req.user.id)
