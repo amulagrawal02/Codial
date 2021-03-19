@@ -1,0 +1,24 @@
+<div class="comment-name">
+    <i class="fas fa-user-circle small-margin"></i>
+    <class="small-margin">
+    <%=comment.user.name%>
+</div>
+
+<div class="post-time medium-margin">
+    <small><i class="far fa-clock"></i>
+        <%=(comment.createdAt).toLocaleTimeString('it-IT')%>
+    </small>
+</div>
+
+<div class="comment-content">
+    <%=comment.content%>
+</div>
+<div class="comment-function">
+    <a href="#"><i class="far fa-thumbs-up" id="like"></i></a>
+    <%if(locals.user && locals.user.id == comment.user.id)
+        {%>
+
+            <a href ="/comment/destroy/<%=comment._id%>"><i class="delete far fa-trash-alt" id="delete"></i></a>
+        <%}
+    %>
+</div>
