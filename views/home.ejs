@@ -4,6 +4,8 @@
 <script async defer src="/JS/post-comment.js"></script>
 
 <h1>Welcome to Codial</h1>
+
+<!-- Post form -->
 <%if(locals.user){%>
     <form action="/posts/create" method="POST">
         <textarea id="post-feed" name="content" cols="40" rows="5" placeholder="Add Post..." required></textarea>
@@ -12,15 +14,22 @@
     </form>
     <%}
 %>
-        <div>
 
-            <%for(post of posts)
-                {%>
-                    <%-include('_post.ejs')-%>
+<!-- Post and comment Section -->
+    <div>
+        <%for(post of posts)
+            {%>
+                <%-include('_post.ejs')-%>
                 
-                <%}
-            %>
+            <%}
+        %>
         </div>
+    </div>
 
+<!-- All profiles -->
 
-            </div>
+<%for(u of all_users){ %> 
+
+    <small><a href="/user/profile/<%=u._id%>"><%=u.name%></a></small>
+    
+    <%}%>

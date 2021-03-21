@@ -9,8 +9,8 @@
         <div class="Auth">
 
                 <% if(locals.user){ %>
-
-                        <a href="/user/profile"><%= user.name %></a>
+                       
+                        <a href="/user/profile/<%=locals.user._id%>"><%= user.name %></a>
                         <a href="/user/sign-out"><i class="fas fa-sign-out-alt"></i></a>
 
                 <% }else{ %>

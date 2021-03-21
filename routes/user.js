@@ -7,7 +7,7 @@ const userController = require('../controllers/user_controller')
 router.get('/',userController.user);
 
 // define the method profile router
-router.get('/profile',passport.checkAuthentication,userController.profile);
+router.get('/profile/:id',userController.profile);
 
 //define the user edit router
 router.get('/edit',userController.edit);

@@ -1,4 +1,5 @@
 const Post = require('../models/postSchema');
+const User = require('../models/userSchema');
 
 module.exports.home = function(req,res)
 {
@@ -14,22 +15,19 @@ module.exports.home = function(req,res)
    .exec(function(err,posts)
    {
       
-      return res.render('home',
+      User.find({},function (err,users) {
+         return res.render('home',
       {
          title : 'Home',
          posts : posts,
+         all_users : users
          
       })
+         
+      })
+      
    })
      
 }
 
 
-// module.exports.home = function(req,res)
-// {
-   
-//    Post.find({},function(err,posts)
-//    {
-//       
-//    })   
-// }
