@@ -60,3 +60,21 @@
   text-decoration: none;
   color: black;
   margin-left: 25px; }
+
+#main-container {
+  display: flex;
+  margin-bottom: 0px; }
+  #main-container #users-list {
+    width: 30%;
+    border-left: 1px solid black; }
+    #main-container #users-list .user-list-inside-box {
+      display: flex;
+      flex-direction: column;
+      text-align: start;
+      padding-left: 30%;
+      grid-row-gap: 10px; }
+      #main-container #users-list .user-list-inside-box :link {
+        text-decoration: none; }
+  #main-container #post-feed {
+    width: 70%;
+    padding: 10px; }

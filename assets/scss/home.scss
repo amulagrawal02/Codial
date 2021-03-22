@@ -101,3 +101,35 @@
     margin-left: 25px;
    
 }
+
+
+#main-container{
+    display: flex;
+    margin-bottom: 0px;
+
+    #users-list{
+        width: 30%;
+        border-left: 1px solid black;
+        .user-list-inside-box{
+          
+            display: flex;
+            flex-direction: column;           
+            text-align: start;
+            padding-left: 30%;
+            grid-row-gap: 10px;
+            :link
+            {
+              
+              text-decoration: none;
+            }
+        }
+        
+    }
+
+    #post-feed{
+        width: 70%;
+        padding: 10px;
+    }
+
+}
+

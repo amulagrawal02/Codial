@@ -3,33 +3,48 @@
 <script async defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script async defer src="/JS/post-comment.js"></script>
 
-<h1>Welcome to Codial</h1>
 
-<!-- Post form -->
-<%if(locals.user){%>
-    <form action="/posts/create" method="POST">
-        <textarea id="post-feed" name="content" cols="40" rows="5" placeholder="Add Post..." required></textarea>
-        <input class="btn-blue" type="submit" value="Add Post">
+<div id="main-container">
 
-    </form>
-    <%}
-%>
+    <section id="post-feed">
 
-<!-- Post and comment Section -->
-    <div>
-        <%for(post of posts)
-            {%>
-                <%-include('_post.ejs')-%>
-                
-            <%}
-        %>
+        <!-- Post form -->
+        <%if(locals.user){%>
+            <form action="/posts/create" method="POST">
+                <textarea id="post-feed" name="content" cols="40" rows="5" placeholder="Add Post..."
+                    required></textarea>
+                <input class="btn-blue" type="submit" value="Add Post">
+
+            </form>
+            <%} %>
+
+                <!-- Post and comment Section -->
+                <div>
+                    <%for(post of posts) {%>
+                        <%-include('_post.ejs')-%>
+
+                            <%} %>
+                </div>
+
+    </section>
+
+
+    <!-- All profiles -->
+    <section id="users-list">
+        <h3><i class="fas fa-user-friends" style="margin-right: 5px;"></i>Users</h3>
+        <div class="user-list-inside-box">
+            <%for(u of all_users){ %>
+
+                <small><a href="/user/profile/<%=u._id%>">
+                        <i class="fas fa-user-circle"></i>
+                        <%=u.name%>
+                    </a>
+                </small>
+
+                <%}%>
         </div>
-    </div>
 
-<!-- All profiles -->
+    </section>
 
-<%for(u of all_users){ %> 
 
-    <small><a href="/user/profile/<%=u._id%>"><%=u.name%></a></small>
-    
-    <%}%>
+</div>
