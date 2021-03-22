@@ -5,7 +5,7 @@ module.exports.profile = function (req, res) {
     User.findById(req.params.id, function (err, ProfileUser) {
         return res.render('userProfile', {
             title: ProfileUser.name,
-            ProfileUser : ProfileUser
+            ProfileUser: ProfileUser
         })
     })
 
@@ -31,7 +31,7 @@ module.exports.signUp = function (req, res) {
         console.log(req.user)
         return res.redirect(`/user/profile/${req.user._id}`)
     }
-    return res.render('user_sign_up', { 
+    return res.render('user_sign_up', {
         title: 'Codeial | SignUp'
     })
 }
@@ -79,5 +79,41 @@ module.exports.signOut = function (req, res) {
 
     res.clearCookie('codeail')
     return res.redirect('/user/sign-in');
+}
+
+module.exports.updateProfile = function (req, res) {
+
+    User.findById(req.params.id, function (err, UserFind) {
+        console.log(UserFind);
+        console.log("Inside the user statment");
+        if (req.body.password != req.body.confirmPassword || req.body.password != UserFind.password) {
+            console.log("Inside the if statment");
+            return res.redirect('back');
+
+        }
+        else {
+
+            console.log("Inside the Authentication statment");
+            User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } }, function (err, UpdateProfile) {
+                if (err) {
+                    console.log("Error during update the user name")
+                    return res.redirect('back');
+                }
+                return res.redirect('back');
+            })
+        }
+
+    })
+
+
+
+
+}
+
+module.exports.updateForm = function (req, res) {
+
+    res.render('UpdateForm', {
+        title: 'Update'
+    });
 }
 

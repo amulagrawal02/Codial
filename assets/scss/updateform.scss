@@ -2,7 +2,7 @@
     font-family: Helvetica, 'FontAwesome', sans-serif;
   }
 
-#container
+#UpdateForm
 {
     
     display: flex;
@@ -10,4 +10,10 @@
     align-items: center;
     grid-row-gap: 10px;
     
+    
+}
+.btn-blue
+{
+    background-color: #376db3;
+    color: white;
 }
