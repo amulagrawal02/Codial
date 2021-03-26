@@ -2,13 +2,21 @@ const User = require('../models/userSchema');
 const { patch } = require('../routes');
 
 // for profile router function
-module.exports.profile = function (req, res) {
-    User.findById(req.params.id, function (err, ProfileUser) {
+module.exports.profile = async function (req, res) {
+    try {
+        let ProfileUser = await User.findById(req.params.id);
         return res.render('userProfile', {
             title: ProfileUser.name,
             ProfileUser: ProfileUser
         })
-    })
+
+    }
+    catch (err) {
+        console.log('Error in finding the user in profile function', err)
+        return res.redirect('back');
+    }
+
+
 
 }
 // user router function
@@ -39,35 +47,34 @@ module.exports.signUp = function (req, res) {
 
 
 // function to create the new user
-module.exports.create = function (req, res) {
+module.exports.create = async function (req, res) {
 
-    if (req.body.password != req.body.confirmpassword) {
-        req.flash('error' , 'Password Not match')
-        return res.redirect('back');
-    }
-    User.findOne({ email: req.body.email }, function (err, user) {
-        if (err) {
-            console.log('Error in finding out the email', err)
+    try {
+        if (req.body.password != req.body.confirmpassword) {
+            req.flash('error', 'Password Not match')
             return res.redirect('back');
         }
-        if (!user) {
-            User.create(req.body, function (err, user) {
-                if (err) {
-                    console.log('Error in creating the email')
-                    return res.redirect('back');
-                }
-                req.flash('success' , 'User Create Successfully')
-                return res.redirect('sign-in');
+        let user = await User.findOne({ email: req.body.email });
 
-            })
+        if (!user) {
+            let user = await User.create(req.body);
+            req.flash('success', 'User Create Successfully')
+            return res.redirect('sign-in');
+
         }
+
         else {
-            
-            req.flash('error' , 'Email is already registor')
+
+            req.flash('error', 'Email is already registor')
             return res.redirect('back')
         }
 
-    })
+    } catch (err) {
+        console.log('error while sign-in', err);
+        return res.redirect('/back')
+    }
+
+
 
 }
 
@@ -80,7 +87,6 @@ module.exports.createSession = function (req, res) {
 // funtion for user sign-out
 module.exports.signOut = function (req, res) {
 
-   
     req.logout();
     req.flash('success', 'Log-Out Successfully')
     return res.redirect('/user/sign-in');
@@ -88,26 +94,30 @@ module.exports.signOut = function (req, res) {
 }
 
 // Function to update the profile name of the user
-module.exports.updateProfile = function (req, res) {
+module.exports.updateProfile = async function (req, res) {
 
-    User.findById(req.params.id, function (err, UserFind) {
-        
-        if (req.body.password != req.body.confirmPassword || req.body.password != UserFind.password) {
+    try {
+        let UserFind = await User.findById(req.params.id);
+
+        if (req.body.password != req.body.confirmPassword) {
+
+            req.flash('error', 'Password is not same as confirmPassword!');
             return res.redirect('back');
 
         }
-        else {
-
-          
-            User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } }, function (err, UpdateProfile) {
-                if (err) {
-                    return res.redirect('back');
-                }
-                return res.redirect('back');
-            })
+        if (req.body.password != UserFind.password) {
+            req.flash('error', 'Password Not Match!')
+            return res.redirect('back');
         }
-
-    })
+       
+            let updateProfile = await User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } });
+            req.flash('success', 'Profile Updated!')
+            return res.redirect('back');
+    
+    } catch (err) {
+        console.log('Error in Upadting the profile', err);
+        return res.redirect('back');
+    }
 
 }
 
