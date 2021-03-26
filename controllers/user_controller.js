@@ -42,7 +42,7 @@ module.exports.signUp = function (req, res) {
 module.exports.create = function (req, res) {
 
     if (req.body.password != req.body.confirmpassword) {
-        req.flash('success' , 'Password Not match')
+        req.flash('error' , 'Password Not match')
         return res.redirect('back');
     }
     User.findOne({ email: req.body.email }, function (err, user) {
@@ -63,7 +63,7 @@ module.exports.create = function (req, res) {
         }
         else {
             
-            req.flash('success' , 'Email is already registor')
+            req.flash('error' , 'Email is already registor')
             return res.redirect('back')
         }
 
@@ -73,7 +73,7 @@ module.exports.create = function (req, res) {
 
 // Function to create session
 module.exports.createSession = function (req, res) {
-    req.flash('success', 'Logged in Successfully')
+    req.flash('success', 'Log-In Successfully')
     return res.redirect('/')
 }
 
@@ -82,7 +82,7 @@ module.exports.signOut = function (req, res) {
 
    
     req.logout();
-    req.flash('success', 'Logged Out Successfully')
+    req.flash('success', 'Log-Out Successfully')
     return res.redirect('/user/sign-in');
 
 }
@@ -91,19 +91,16 @@ module.exports.signOut = function (req, res) {
 module.exports.updateProfile = function (req, res) {
 
     User.findById(req.params.id, function (err, UserFind) {
-        console.log(UserFind);
-        console.log("Inside the user statment");
+        
         if (req.body.password != req.body.confirmPassword || req.body.password != UserFind.password) {
-            console.log("Inside the if statment");
             return res.redirect('back');
 
         }
         else {
 
-            console.log("Inside the Authentication statment");
+          
             User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } }, function (err, UpdateProfile) {
                 if (err) {
-                    console.log("Error during update the user name")
                     return res.redirect('back');
                 }
                 return res.redirect('back');

@@ -8,10 +8,13 @@ const User = require('../models/userSchema')
 
 // authentication using passport
 passport.use(new LocalStrategy({
-    usernameField: 'email'
+    usernameField: 'email',
     // this email is same as mongoose schema 
+    passReqToCallback : true
+    //  this function passReqToCallback is use because we want to access req.flash() 
+    // and req is not define that's why we use to able to access the req 
     },
-    function(email,password,done)
+    function(req,email,password,done)
     {
         // Find the user using email
         User.findOne({email : email},function(err,user)
@@ -23,6 +26,7 @@ passport.use(new LocalStrategy({
             }
             if(!user || user.password != password)
             {
+                req.flash('error' , 'Invalid User/Password')
                 console.log("Invalid User/Password")
                 return done(null, false)
             }

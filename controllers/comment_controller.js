@@ -27,7 +27,7 @@ module.exports.create = function(req,res)
 
                     post.comments.push(done);
                     post.save();
-                    req.flash('success' ,'Comment Added Successfully')
+                    req.flash('success','Comment Added Successfully!!')
                     return res.redirect('back')
                 }
             )
@@ -60,7 +60,7 @@ module.exports.destroy = function(req,res)
                         console.log('Error while deleting the comment');
                         return res.redirect('back');
                     }
-                    req.flash('success' ,'Comment Deleted Successfully')
+                    req.flash('success' ,'Comment Deleted Successfully!!')
                     return res.redirect('back');
                 })
             
