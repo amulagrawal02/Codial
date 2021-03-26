@@ -3,6 +3,7 @@ const { localsName } = require('ejs')
 const Comment = require('../models/commetSchema')
 const Post = require('../models/postSchema')
 
+// function to uplad the comment
 module.exports.create = function(req,res)
 {
     
@@ -26,6 +27,7 @@ module.exports.create = function(req,res)
 
                     post.comments.push(done);
                     post.save();
+                    req.flash('success' ,'Comment Added Successfully')
                     return res.redirect('back')
                 }
             )
@@ -34,6 +36,8 @@ module.exports.create = function(req,res)
  
 }
 
+
+// function to delete the comment
 module.exports.destroy = function(req,res)
 {
     Comment.findById(req.params.id, function(err, comment)
@@ -56,6 +60,7 @@ module.exports.destroy = function(req,res)
                         console.log('Error while deleting the comment');
                         return res.redirect('back');
                     }
+                    req.flash('success' ,'Comment Deleted Successfully')
                     return res.redirect('back');
                 })
             

@@ -12,6 +12,14 @@
 </head>
 <body>
     <%- include('header'); -%>
+    <!-- For printing the flash messages -->
+    <%
+        if(locals.flash.success && locals.flash.success.length > 0)
+            {%>
+                <%=locals.flash.success%>
+        
+            <%}
+    %>
     
     <%-body%>
 

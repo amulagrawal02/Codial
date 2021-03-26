@@ -5,6 +5,11 @@ const port = 8000
 const app = express();
 const expressLayouts = require('express-ejs-layouts')
 const sassMiddleware = require('node-sass-middleware')
+const passportHttp = require('passport-http');
+// for using the logout funtion in authentication
+const logout = require('express-passport-logout')
+const flash = require('connect-flash');
+const customMware = require('./config/middleware')
 
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -69,6 +74,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.SetAuthenticationUser);
+// Always define flash after the seesion cookies because only work after the session cookkies is made
+app.use(flash());
+app.use(customMware.setFlash)
+
 // Setup Route
 app.use('/',require('./routes/'))
 

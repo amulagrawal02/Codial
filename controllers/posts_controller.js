@@ -3,6 +3,8 @@ const { findById } = require('../models/postSchema');
 const Post = require('../models/postSchema');
 const Comment = require('../models/commetSchema')
 
+
+// Funtion to upload new post
 module.exports.create = function(req,res)
 {
     if(!req.user)
@@ -21,12 +23,14 @@ module.exports.create = function(req,res)
                 console.log("error in posting")
                 return ;
             }
+            req.flash('success' ,'Post Added Successfully')
             return res.redirect('back')
 
         }
     )
 }
 
+// function to delete the post
 module.exports.destroy = function(req,res)
 {
     Post.findById(req.params.id,function(err,post)
@@ -44,6 +48,7 @@ module.exports.destroy = function(req,res)
         {
 
            post.remove();
+           req.flash('success' ,'Post Deleted Successfully')
            Comment.deleteMany({post : req.params.id},function(err)
            {
                return res.redirect('back');

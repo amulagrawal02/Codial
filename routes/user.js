@@ -9,8 +9,7 @@ router.get('/',userController.user);
 // define the method profile router
 router.get('/profile/:id',userController.profile);
 
-//define the user edit router
-router.get('/edit',userController.edit);
+
 
 // define the user signIn router
 router.get('/sign-in',userController.signIn)

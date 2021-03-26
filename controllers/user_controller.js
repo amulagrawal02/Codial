@@ -1,4 +1,5 @@
 const User = require('../models/userSchema');
+const { patch } = require('../routes');
 
 // for profile router function
 module.exports.profile = function (req, res) {
@@ -36,14 +37,12 @@ module.exports.signUp = function (req, res) {
     })
 }
 
-// user edit function
-module.exports.edit = function (req, res) {
-    return res.send('User edit page')
-}
 
+// function to create the new user
 module.exports.create = function (req, res) {
 
     if (req.body.password != req.body.confirmpassword) {
+        req.flash('success' , 'Password Not match')
         return res.redirect('back');
     }
     User.findOne({ email: req.body.email }, function (err, user) {
@@ -57,12 +56,14 @@ module.exports.create = function (req, res) {
                     console.log('Error in creating the email')
                     return res.redirect('back');
                 }
+                req.flash('success' , 'User Create Successfully')
                 return res.redirect('sign-in');
 
             })
         }
         else {
-
+            
+            req.flash('success' , 'Email is already registor')
             return res.redirect('back')
         }
 
@@ -70,17 +71,23 @@ module.exports.create = function (req, res) {
 
 }
 
+// Function to create session
 module.exports.createSession = function (req, res) {
+    req.flash('success', 'Logged in Successfully')
     return res.redirect('/')
 }
 
+// funtion for user sign-out
 module.exports.signOut = function (req, res) {
 
-
-    res.clearCookie('codeail')
+   
+    req.logout();
+    req.flash('success', 'Logged Out Successfully')
     return res.redirect('/user/sign-in');
+
 }
 
+// Function to update the profile name of the user
 module.exports.updateProfile = function (req, res) {
 
     User.findById(req.params.id, function (err, UserFind) {
@@ -105,11 +112,9 @@ module.exports.updateProfile = function (req, res) {
 
     })
 
-
-
-
 }
 
+// funtion when user click on the update option i.e. update form
 module.exports.updateForm = function (req, res) {
 
     res.render('UpdateForm', {
