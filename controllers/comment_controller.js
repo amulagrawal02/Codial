@@ -6,18 +6,19 @@ const Post = require('../models/postSchema')
 // function to uplad the comment
 module.exports.create = async function (req, res) {
     try {
-        let post = Post.findById(req.body.post);
+        let post = await Post.findById(req.body.post);
         {
             if (post) {
-                let CommentCreate = Comment.create(
+                let CommentCreate = await Comment.create(
                     {
                         content: req.body.content,
                         user: req.user._id,
                         post: req.body.post,
                         name: req.body.name
                     });
-
-                post.comments.push(done);
+                
+                   
+                post.comments.push(CommentCreate);
                 post.save();
                 req.flash('success', 'Comment Added Successfully!!')
                 return res.redirect('back')
@@ -33,13 +34,13 @@ module.exports.create = async function (req, res) {
 
 
 // function to delete the comment
-module.exports.destroy = function (req, res) {
+module.exports.destroy = async function (req, res) {
     try {
-        let comment = Comment.findById(req.params.id)
+        let comment = await Comment.findById(req.params.id)
         if (comment.user = req.user._id) {
             let PostId = comment.post;
             comment.remove();
-            let post = Post.findByIdAndUpdate(PostId, { $pull: { comments: req.params.id } });
+            let post = await Post.findByIdAndUpdate(PostId, { $pull: { comments: req.params.id } });
             req.flash('success', 'Comment Deleted Successfully!!');
             return res.redirect('back');
         }
