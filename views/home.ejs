@@ -10,19 +10,17 @@
 
         <!-- Post form -->
         <%if(locals.user){%>
-            <form action="/posts/create" method="POST">
+            <form action="/posts/create" method="POST" id="new-post-form">
                 <textarea id="post-feed" name="content" cols="40" rows="5" placeholder="Add Post..."
                     required></textarea>
                 <input class="btn-blue" type="submit" value="Add Post">
-
             </form>
             <%} %>
 
                 <!-- Post and comment Section -->
-                <div>
+                <div id="post-list-container">
                     <%for(post of posts) {%>
-                        <%-include('_post.ejs')-%>
-
+                        <%-include('_post')-%>
                             <%} %>
                 </div>
 
@@ -34,17 +32,15 @@
         <h3><i class="fas fa-user-friends" style="margin-right: 5px;"></i>Users</h3>
         <div class="user-list-inside-box">
             <%for(u of all_users){ %>
-
                 <small><a href="/user/profile/<%=u._id%>">
                         <i class="fas fa-user-circle"></i>
                         <%=u.name%>
                     </a>
                 </small>
-
                 <%}%>
         </div>
 
     </section>
 
-
+<script src="/JS/home_post.js"></script>
 </div>

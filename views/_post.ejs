@@ -1,6 +1,6 @@
-<div class="post-container">
-
-    <div class="post-name">
+<div class="post-container" id ="post-container-<%=post._id%>">
+    
+        <div class="post-name">
         <i class="fas fa-user-circle small-margin"></i>
         <class="small-margin">
             <%=post.user.name%>
@@ -22,12 +22,9 @@
     <%if(locals.user && locals.user.id==post.user.id)
         {%>
 
-            <a href="/posts/destroy<%=post._id%>"><i class="delete far fa-trash-alt" id="delete"></i></a>
+            <a class="delete-post-btn" href="/posts/destroy/<%=post._id%>"><i class="delete far fa-trash-alt" id="delete"></i></a>
         <%}
     %>
-
-
-
 
             <div class="comment-container" id="<%=post._id%>">
                 <div id="post-comment">
@@ -43,4 +40,5 @@
                     <%} 
                 %>
             </div>
+    
 </div>

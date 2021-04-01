@@ -1,4 +1,4 @@
-console.log('Checking for post reply')
+
 
 // var btnComment = document.getElementById('comments')
 var commentContent = document.getElementById('comment-container');
