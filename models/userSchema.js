@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
         },
         avatar: {
             type : String,
-            default : (path.join(AVATAR_PATH,'avatar-1617638242799'))
+            default : (path.join(AVATAR_PATH,'avatar-1617644136897'))
         }
 
     }, {

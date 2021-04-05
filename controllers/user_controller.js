@@ -101,9 +101,6 @@ module.exports.updateProfile = async function (req, res) {
         try {
             let UserFind = await User.findById(req.params.id);
 
-
-
-
             // let updateProfile = await User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } });
             // req.flash('success', 'Profile Updated!')
             // return res.redirect('back');
