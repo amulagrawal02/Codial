@@ -22,6 +22,7 @@ module.exports.create = async function (req, res) {
             return res.status(200).json({
                 data: {
                     post: post,
+                    time : post.createdAt.toLocaleTimeString(),
                     UserDetails : UserDetails
                 },
                 message: "Post Created!"

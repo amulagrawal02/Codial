@@ -78,6 +78,8 @@ app.use(passport.SetAuthenticationUser);
 app.use(flash());
 app.use(customMware.setFlash)
 
+app.use('/uploads',express.static(__dirname + '/uploads'))
+
 // Setup Route
 app.use('/',require('./routes/'))
 

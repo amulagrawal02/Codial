@@ -2,9 +2,10 @@
 <script src="https://kit.fontawesome.com/0c13de2b67.js" crossorigin="anonymous"></script>
 
 <h1>Update</h1>
-<form action="/user/update/<%=user._id%>" method="POST">
+<form action="/user/update/<%=user._id%>" enctype="multipart/form-data" method="POST">
     <div id="UpdateForm">
-        <input class="fontAwesome" type="text" name="Chaname" placeholder="&#xf007; Updated Name" required>
+        <input class="fontAwesome" type="text" name="Chaname" placeholder="&#xf007; Updated Name" >
+        <input type="file" name="avatar" placeholder="Choose file" id="">
         <input class="fontAwesome" type="password" name="password" placeholder="&#xf023; Password" required>
         <input class="fontAwesome" type="password" name="confirmPassword" placeholder="&#xf023; Confirm Password" required>
         <input class="btn-blue" type="submit" value="Update">

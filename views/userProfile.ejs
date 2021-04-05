@@ -2,7 +2,7 @@
     <h1>Profile</h1>
     <p><%= ProfileUser.name%></p>
     <p><%= ProfileUser.email %></p>
-
+    <img src="<%=ProfileUser.avatar%>" alt="<%=ProfileUser.name%>" width="100">
     <%if(locals.user && locals.user.id == ProfileUser.id)
         {%>
         <a href="/user/update/">Update</a>
