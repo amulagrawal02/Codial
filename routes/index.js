@@ -18,5 +18,8 @@ router.use('/posts', require('./posts'))
 
 router.use('/comment',require('./comment'))
 
+// connect with api routes
+router.use('/api',require('./api'))
+
 
 module.exports = router;
