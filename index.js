@@ -33,6 +33,7 @@ const passport = require('passport')
 const passportLocal = require('./config/passport-local-strtegy')
 const MongoStore = require('connect-mongo')(session);
 
+const passportJWT = require('./config/passport-jwt-strategy')
 
 app.use(express.static('./assets'))
 
