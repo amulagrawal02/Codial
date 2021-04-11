@@ -78,9 +78,9 @@ module.exports.create = async function (req, res) {
 }
 
 // Function to create session
-module.exports.createSession =  function (req, res) {
-   
-    req.flash('success','Log-In Successfully')
+module.exports.createSession = function (req, res) {
+
+    req.flash('success', 'Log-In Successfully')
     return res.redirect('http://localhost:8000')
 }
 
@@ -99,11 +99,7 @@ module.exports.updateProfile = async function (req, res) {
     if (req.user.id == req.params.id) {
         try {
             let UserFind = await User.findById(req.params.id);
-            console.log(req.body)
-            await User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } });
-            req.flash('success', 'Profile Updated!')
-    
-
+            let UserId = req.params.id;
             await User.uploadedAvatar(req, res, function (err) {
                 console.log(req.body)
                 if (err) {
@@ -120,17 +116,29 @@ module.exports.updateProfile = async function (req, res) {
                     return res.redirect('back');
                 }
 
+                if (req.body.Chaname.length > 0) {
+                    User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } }, function (req, res) {
+                        console.log('Name Change')
+                    });
+                }
+
+
+
                 if (req.file) {
-                    console.log("req.file")
-                    if (UserFind.avatar) {
-                        fs.unlinkSync(path.join(__dirname, '..', UserFind.avatar))
+                    try {
+                        if (UserFind.avatar) {
+                            fs.unlinkSync(path.join(__dirname, '..', UserFind.avatar))
+                        }
+                        UserFind.avatar = User.avatarPath + '/' + req.file.filename;
+                    } catch (error) {
+                        UserFind.avatar = User.avatarPath + '/' + req.file.filename;
                     }
-                    UserFind.avatar = User.avatarPath + '/' + req.file.filename;
+
 
                 }
 
                 UserFind.save();
-                req.flash("success",'Updated SuccessFully!')
+                req.flash("success", 'Updated SuccessFully!')
                 return res.redirect('/')
             })
 
