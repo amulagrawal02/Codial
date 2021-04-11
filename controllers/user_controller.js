@@ -17,8 +17,6 @@ module.exports.profile = async function (req, res) {
         return res.redirect('back');
     }
 
-
-
 }
 // user router function
 module.exports.user = function (req, res) {
@@ -28,7 +26,7 @@ module.exports.user = function (req, res) {
 // signIn fucntion
 module.exports.signIn = function (req, res) {
     if (req.isAuthenticated()) {
-        return res.redirect(`/user/profile/${req.user._id}`)
+        return res.redirect(`/users/profile/${req.user._id}`)
     }
     return res.render('user_sign_in', {
         title: 'Codeial | SignIn'
@@ -39,7 +37,7 @@ module.exports.signIn = function (req, res) {
 module.exports.signUp = function (req, res) {
     if (req.isAuthenticated()) {
         console.log(req.user)
-        return res.redirect(`/user/profile/${req.user._id}`)
+        return res.redirect(`/users/profile/${req.user._id}`)
     }
     return res.render('user_sign_up', {
         title: 'Codeial | SignUp'
@@ -80,9 +78,10 @@ module.exports.create = async function (req, res) {
 }
 
 // Function to create session
-module.exports.createSession = function (req, res) {
-    req.flash('success', 'Log-In Successfully')
-    return res.redirect('/')
+module.exports.createSession =  function (req, res) {
+   
+    req.flash('success','Log-In Successfully')
+    return res.redirect('http://localhost:8000')
 }
 
 // funtion for user sign-out
@@ -90,7 +89,7 @@ module.exports.signOut = function (req, res) {
 
     req.logout();
     req.flash('success', 'Log-Out Successfully')
-    return res.redirect('/user/sign-in');
+    return res.redirect('/users/sign-in');
 
 }
 
@@ -100,12 +99,12 @@ module.exports.updateProfile = async function (req, res) {
     if (req.user.id == req.params.id) {
         try {
             let UserFind = await User.findById(req.params.id);
+            console.log(req.body)
+            await User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } });
+            req.flash('success', 'Profile Updated!')
+    
 
-            // let updateProfile = await User.findByIdAndUpdate(req.params.id, { $set: { name: req.body.Chaname } });
-            // req.flash('success', 'Profile Updated!')
-            // return res.redirect('back');
-
-            User.uploadedAvatar(req, res, function (err) {
+            await User.uploadedAvatar(req, res, function (err) {
                 console.log(req.body)
                 if (err) {
                     console.log(err)

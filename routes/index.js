@@ -12,7 +12,7 @@ console.log('Inside the home functions')
 // connect with homeController
 router.get('/',homeController.home)
 // connect with user routes
-router.use('/user',require('./user'))
+router.use('/users',require('./user'))
 
 router.use('/posts', require('./posts'))
 

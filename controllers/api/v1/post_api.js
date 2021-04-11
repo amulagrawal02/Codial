@@ -20,6 +20,7 @@ module.exports.index = async function (req, res) {
 
 module.exports.destroy = async function (req, res) {
     try {
+        
         let post = await Post.findById(req.params.id);
 
         for (comment of post.comments) {

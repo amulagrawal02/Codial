@@ -6,10 +6,12 @@ const app = express();
 const expressLayouts = require('express-ejs-layouts')
 const sassMiddleware = require('node-sass-middleware')
 const passportHttp = require('passport-http');
+const passportgoogle = require('./config/pasport-outh-strategy')
 // for using the logout funtion in authentication
 const logout = require('express-passport-logout')
 const flash = require('connect-flash');
 const customMware = require('./config/middleware')
+
 
 app.use(sassMiddleware({
     src: './assets/scss',
